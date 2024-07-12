@@ -1,17 +1,19 @@
 {
   "name": "@fathym-mpt/v1-mpt-landing-page",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.0",
+  "private": false,
   "description": "MPT Marketing Site",
   "keywords": [
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "deploy": "npm version patch && npm run deploy:docs",
+    "deploy:docs": "npm version patch --prefix static && npm run build && npm publish ./public --access public",
+    "develop": "gatsby develop",
+    "serve": "gatsby serve",
+    "start": "gatsby develop",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
