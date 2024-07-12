@@ -1,8 +1,8 @@
 {
-  "name": "tmp-cpa",
+  "name": "@fathym-mpt/v1-mpt-landing-page",
   "version": "1.0.0",
   "private": true,
-  "description": "Plasmic app for qVDSajcDVViU3vswSFUwDR",
+  "description": "MPT Marketing Site",
   "keywords": [
     "gatsby"
   ],
