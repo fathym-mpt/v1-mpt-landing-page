@@ -10,7 +10,7 @@
     "build": "gatsby build",
     "clean": "gatsby clean",
     "deploy": "npm version patch && npm run deploy:docs",
-    "deploy:docs": "npm version patch --prefix static && npm run build && npm publish ./public --access public && ftm git \"latest deploy\"",
+    "deploy:docs": "npm version patch --prefix static && npm run build && npm publish ./public --access public && npx ftm git \"latest deploy\"",
     "develop": "gatsby develop",
     "serve": "gatsby serve",
     "start": "gatsby develop",
