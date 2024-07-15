@@ -2,22 +2,20 @@ name: fathym-mpt/v1-mpt-landing-page
 
 on:
   push:
-    branches: [main]
+    branches: [main,integration]
   pull_request:
-    branches: [main]
-  repository_dispatch:
-    types: [plasmic]  
+    branches: [main,integration]
   workflow_dispatch:
 
 permissions: write-all
 
 env:
   CI: false
-  Branches: main
+  Branches: main,integration
   MainBranch: main
   NPMRegistry: https://registry.npmjs.org/
   InstallCommand: npm i
-  BuildCommand: npm run deploy
+  BuildCommand: npm run build
   Output: ./public
 
 jobs:
