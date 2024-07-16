@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
   repository_dispatch:
-    types: [plasmic]  
+    types: [plasmic]
   workflow_dispatch:
 
 permissions: write-all
@@ -19,6 +19,9 @@ env:
   InstallCommand: npm i
   BuildCommand: npm run deploy
   Output: ./public
+  AZURE_RESOURCE_GROUP_NAME: fathym-mpt
+  AZURE_APP_NAME: mpt-core-runtime
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
 jobs:
   build:
@@ -131,3 +134,12 @@ jobs:
           webhook_url: ${{ secrets.LCU_WEBHOOK_URL }}
           webhook_secret: ${{ secrets.LCU_WEBHOOK_SECRET }}
           data: '{ "EnterpriseLookup": "${{ secrets.LCU_ENTERPRISE_LOOKUP }}", "Username": "${{ secrets.LCU_USERNAME }}" }'
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ env.AZURE_CREDENTIALS }}
+        
+      - name: Restart App Service
+        run: |
+          az webapp restart --name ${{ env.AZURE_APP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }}
