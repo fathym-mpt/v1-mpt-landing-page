@@ -5,6 +5,8 @@ on:
     branches: [main, integration]
   pull_request:
     branches: [main, integration]
+  repository_dispatch:
+    types: [plasmic]  
   workflow_dispatch:
 
 permissions: write-all
