@@ -9,7 +9,7 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "deploy": "npm run clean && npm version patch && npm run deploy:docs",
+    "deploy": "npm version patch && npm run deploy:docs",
     "deploy:docs": "npm version patch --prefix static && npm run build && npm publish ./public --access public",
     "deploy:local": "npm run deploy && npx ftm git \"Latest Local Deploy\"",
     "develop": "gatsby develop",
