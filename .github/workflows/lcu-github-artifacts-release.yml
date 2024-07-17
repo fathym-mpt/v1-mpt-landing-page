@@ -114,6 +114,8 @@ jobs:
       - name: npm build
         if: ${{ !!env.BuildCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
         run: ${{ env.BuildCommand }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # publish github artifacts
       - name: Archive production artifacts
