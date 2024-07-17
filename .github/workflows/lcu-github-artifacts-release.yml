@@ -2,9 +2,9 @@ name: fathym-mpt/v1-mpt-landing-page
 
 on:
   push:
-    branches: [main,integration]
+    branches: [main, integration]
   pull_request:
-    branches: [main,integration]
+    branches: [main, integration]
   workflow_dispatch:
 
 permissions: write-all
@@ -131,3 +131,14 @@ jobs:
           webhook_url: ${{ secrets.LCU_WEBHOOK_URL }}
           webhook_secret: ${{ secrets.LCU_WEBHOOK_SECRET }}
           data: '{ "EnterpriseLookup": "${{ secrets.LCU_ENTERPRISE_LOOKUP }}", "Username": "${{ secrets.LCU_USERNAME }}" }'
+
+      - name: 'Login via Azure CLI'
+        if: ${{ steps.vars.outputs.branchName == env.MainBranch }}
+        uses: azure/login@v1
+        with:
+          creds: ${{ env.AZURE_CREDENTIALS }}
+
+      - name: Restart App Service
+        if: ${{ steps.vars.outputs.branchName == env.MainBranch }}
+        run: |
+          az webapp restart --name ${{ env.AZURE_APP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }}
